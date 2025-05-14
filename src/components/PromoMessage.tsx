@@ -17,6 +17,18 @@ const PromoMessage: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
+  // Add script loading effect
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://app.tribopay.com.br/js/oneclick.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
 
@@ -82,54 +94,22 @@ const PromoMessage: React.FC = () => {
         <div className="text-green-500 text-4xl font-bold mb-4">R$19,90</div>
       </div>
 
-      {/* New one-click upsell buttons */}
-      <div style={{ width: 'auto', maxWidth: '400px' }} className="mx-auto">
-        <a href="javascript:void(0)" data-fornpay="qiarlsak6w" className="fornpay_btn">
+      <div className="max-w-[400px] mx-auto">
+        <a 
+          href="javascript:void(0)" 
+          data-fornpay="qiarlsak6w" 
+          className="fornpay_btn bg-gradient-to-b from-[#00cc66] to-[#00a352] text-white font-arial text-lg py-3 px-6 rounded-lg border border-[#00b359] block text-center mb-3 hover:opacity-90 transition-opacity"
+        >
           SIM, EU ACEITO ESSA OFERTA
         </a>
-        <a href="javascript:void(0)" data-downsell="null" className="fornpay_downsell">
+        <a 
+          href="javascript:void(0)" 
+          data-downsell="https://tecnicasedesejo.shop/promocaoexclusiva2/" 
+          className="fornpay_downsell text-[#FF0000] font-arial text-base text-center block hover:underline"
+        >
           Vou recusar essa oferta
         </a>
       </div>
-
-      <style>
-        {`
-          .fornpay_btn {
-            background: #00cc66;
-            background-image: -webkit-linear-gradient(top, #00cc66, #00a352);
-            background-image: -moz-linear-gradient(top, #00cc66, #00a352);
-            background-image: -ms-linear-gradient(top, #00cc66, #00a352);
-            background-image: -o-linear-gradient(top, #00cc66, #00a352);
-            background-image: -webkit-gradient(to bottom, #00cc66, #00a352);
-            -webkit-border-radius: 10px;
-            -moz-border-radius: 10px;
-            border-radius: 10px;
-            color: #fff;
-            font-family: Arial;
-            font-size: 18px;
-            font-weight: 100;
-            padding: 10px 20px;
-            border: 1px solid #00b359;
-            text-decoration: none;
-            display: block;
-            cursor: pointer;
-            text-align: center;
-          }
-
-          .fornpay_downsell {
-            color: #FF0000;
-            font-family: Arial;
-            margin-top: 10px;
-            font-size: 16px!important;
-            font-weight: 100;
-            text-decoration: none;
-            display: block;
-            cursor: pointer;
-            text-align: center;
-          }
-        `}
-      </style>
-      <script src="https://app.tribopay.com.br/js/oneclick.js" async></script>
     </div>
   );
 };

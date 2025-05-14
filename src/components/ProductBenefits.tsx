@@ -18,6 +18,18 @@ const ProductBenefits: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
+  // Add script loading effect
+  React.useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://app.tribopay.com.br/js/oneclick.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
 
@@ -124,7 +136,6 @@ const ProductBenefits: React.FC = () => {
             </div>
           </div>
 
-          {/* One-click upsell buttons */}
           <div className="max-w-[400px] mx-auto">
             <a 
               href="javascript:void(0)" 
@@ -135,7 +146,7 @@ const ProductBenefits: React.FC = () => {
             </a>
             <a 
               href="javascript:void(0)" 
-              data-downsell="null" 
+              data-downsell="https://tecnicasedesejo.shop/promocaoexclusiva2/" 
               className="fornpay_downsell text-[#FF0000] font-arial text-base text-center block hover:underline"
             >
               Vou recusar essa oferta
